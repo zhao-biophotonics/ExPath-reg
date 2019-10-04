@@ -4,5 +4,5 @@ This code has been tested on MatLab 2014b.
 # Dependency
 All the dependencies have been included.
 # Installation guide
-Download the code in a folder and put the folder path in the search path of Matlab.
+Download the code in a folder and put the folder path in the search path of Matlab. Unzip the helper.zip under the same folder.
 # Example data can be downloaded via https://drive.google.com/open?id=1lG8wp_UIl_ki0XPKiCKwT6DCZP_-3wWQ
