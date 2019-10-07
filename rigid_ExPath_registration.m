@@ -1,7 +1,7 @@
 %Rigid registration of pre-expansion and post-expansion images using SIFT and RANSAC.
 %Created by Yongxin based on the demo code in vlfeat.org 20151208
 %Added downsampling to speed up the search, by Yongxin Zhao 20151210
-%Generalize the z projection matching, by Yongxin zhao 20160404
+%Generalize the z projection matching so that z stack can be analysed, by Yongxin zhao 20160404
 %Speed up the process by skipping adjacent z plane if the number of matching keypoints is lower than the user defined value, by Yongxin Zhao 20180411
 %Code clean-up by Yongxin Zhao 20190820
 %The code uses vlfeat for SIFT and RANSAC computation.
@@ -31,11 +31,11 @@ radius = 30; %Maximum tolerated RANSAC distance
 ChannelNumber = 4; %The number of channels for the pre-expansion image (map)
 ChannelNumber2 = 4; %The number of channels for the post-expansion image (query)
 z_pre = 1; %The number of planes for maximum intensity projection for pre-expansion images. 1 means no z projection.
-z_projection =5; %The number of planes for maxium intensity projection in the query images. 1 means no z projection.
+z_projection =5; %The number of planes for maxium intensity projection in the query images. 1 means no z projection. Typically, the z_projection should be z_pre * estimated expansion factor (4 or 5).
 downsampling_pre = 2; %Downsampling factor to speed up the search
-downsampling_post = 10; %Downsampling factor to speed up the search
-map_pixel = 0.163; % Pixel size of the map image, unit: um. 
-query_pixel = 0.163; %Pixel size of the query image, unit: um.
+downsampling_post = 10; %Downsampling factor to speed up the search; We recommend downsampling_post = downsampling_pre * 4 or 5 to match the reolution of pre-expansion for searching.
+map_pixel = 0.163; % Pixel size of the map image, unit: um/pixel. Please check your microscope optical specification to find out. For our setup, 40x water immersion objective with NA 1.05 and a Zyla camera translate this to 0.163 um/pixel.
+query_pixel = 0.163; %Pixel size of the query image, unit: um/pixel. Same if the same microscope, camera and lens are used.
 keypoint_threshold = 7; %User-defined threshold for skipping adjacent z plane.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Loading images.
